@@ -47,6 +47,7 @@ public class Exercicio4 {
             System.out.println("Escolha uma cidade: Passa Quatro, Virginia");
             String cidade = scanner.nextLine();
 
+
             switch (cidade) {
                 case "Passa Quatro" -> {
                     System.out.println("400 mil habitantes");
@@ -60,5 +61,6 @@ public class Exercicio4 {
                 }
             }
         }
+        else System.out.println("Erro de digitação");
     }
 }

@@ -22,8 +22,8 @@ public class Exercicio5 {
         float horasExtrasTrabalhadas = Float.parseFloat(scanner.nextLine());
 
         valorHoraNormal = valorHoraReais * horasNormais;
-        valorHoraExtra = (valorHoraNormal * 0.5) + valorHoraNormal ;
-        valorHoraExtraTrabalhada = (valorHoraReais *2) * horasExtrasTrabalhadas;
+        valorHoraExtra = (valorHoraReais * 1.5) * horasExtras;
+        valorHoraExtraTrabalhada = (valorHoraReais *2) * horasExtrasTrabalhadas ;
 
         System.out.println("valor do salario: "+ (valorHoraNormal+valorHoraExtra+valorHoraExtraTrabalhada));
     }

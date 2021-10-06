@@ -10,7 +10,8 @@ public class Exercicio1 {
         String nome = scanner.nextLine();
 
         System.out.println("Digite sua idade: ");
-        String idade = scanner.nextLine();
+        int idade = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.println("Digite sua cidade: ");
         String cidade = scanner.nextLine();
