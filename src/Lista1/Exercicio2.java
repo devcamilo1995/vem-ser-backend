@@ -1,4 +1,4 @@
-package com.dbc;
+package Lista1;
 
 import java.util.Scanner;
 
