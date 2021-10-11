@@ -2,6 +2,8 @@ package com.dbc.Lista1;
 
 import java.util.Scanner;
 
+//Criar um algoritmo onde o usuário possa escolher o estado, escolhido haverá uma lista com determinadas
+
 public class Exercicio4 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

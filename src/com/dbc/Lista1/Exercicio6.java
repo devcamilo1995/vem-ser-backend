@@ -1,7 +1,7 @@
 package com.dbc.Lista1;
 
 import java.util.Scanner;
-
+//Criar um tradutor que traduza as seguintes palavras de inglês para português e de português para inglês.
 public class Exercicio6 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
