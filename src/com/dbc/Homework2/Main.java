@@ -103,13 +103,22 @@ public class Main {
 
 
         contaCorrenteClienteUm.transferir(contaPoupancaClienteDois,1000);
+
+
+        contaPagamentoClienteUm.sacar(500);
+
+
+
+        contaPoupancaClienteDois.depositar(1000);
+
+        contaPagamentoClienteUm.imprimir();
         contaCorrenteClienteUm.imprimir();
         contaPoupancaClienteDois.imprimir();
 
-//        contaPagamentoClienteUm.sacar(500);
-//        contaPagamentoClienteUm.imprimir();
-//
-//        contaPoupancaClienteDois.depositar(100);
+//        contaPoupancaClienteDois.creditarTaxa();
 //        contaPoupancaClienteDois.imprimir();
+//
+//        contaCorrenteClienteUm.sacar(7000);
+//        contaCorrenteClienteUm.imprimir();
     }
 }

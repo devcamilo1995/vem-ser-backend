@@ -52,6 +52,6 @@ public class ContaCorrente extends Conta implements Impressao {
 
     @Override
     public void imprimir() {
-        System.out.println("Saldo: " + this.getSaldo());
+        System.out.println("Saldo + cheque especial: " + this.retornarSaldoComChequeEspecial());
     }
 }
