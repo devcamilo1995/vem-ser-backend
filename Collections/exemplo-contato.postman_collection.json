@@ -1,0 +1,358 @@
+{
+	"info": {
+		"_postman_id": "84cd33e1-046f-4a4f-a1db-c35cf8b8a84f",
+		"name": "Homework pessoa/endereco/contato",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pessoa",
+			"item": [
+				{
+					"name": "Get/pessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST/pessoa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"a\",\r\n        \"dataNascimento\": \"2018-10-10\",\r\n        \"cpf\": \"12345678910\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pessoa/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE/pessoa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/pessoa/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT/pessoa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nome\": \"a\",\r\n        \"dataNascimento\": \"1990-10-10\",\r\n        \"cpf\": \"12345678910\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/pessoa/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"pessoa",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereco",
+			"item": [
+				{
+					"name": "GET/endereco",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/endereco",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET/endereco/idPessoa/pessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/endereco/1/pessoa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"endereco",
+								"1",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET/endereco/idEndereco",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/endereco/idendereco?idEndereco=3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"endereco",
+								"idendereco"
+							],
+							"query": [
+								{
+									"key": "idEndereco",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT/endereco/IdEndereco",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"tipo\": \"RESIDENCIAL\",\r\n        \"logradouro\": \"cinco\",\r\n        \"numero\": 484,\r\n        \"complemento\": \"Não tem\",\r\n        \"cep\": \"12504010\",\r\n        \"cidade\": \"Guaratingueta\",\r\n        \"estado\": \"São Paulo\",\r\n        \"pais\": \"Brasil\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/endereco/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"endereco",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE/endereco/idEndereco",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/endereco/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"endereco",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST/endereco/IdPessoa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"tipo\": \"RESIDENCIAL\",\r\n        \"logradouro\": \"umAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\r\n        \"numero\": 484,\r\n        \"complemento\": \"Não tem\",\r\n        \"cep\": \"12504010\",\r\n        \"cidade\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\r\n        \"estado\": \"São Paulo\",\r\n        \"pais\": \"Brasil\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/endereco/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"endereco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contato",
+			"item": [
+				{
+					"name": "GET/contato",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/contato",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET/contato/numero",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/contato/bynumero?numero=12981117598",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contato",
+								"bynumero"
+							],
+							"query": [
+								{
+									"key": "numero",
+									"value": "12981117598"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE/contato",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/contato/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contato",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT/contato",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"idPessoa\": 1,\r\n        \"tipoContato\": \"RESIDENCIAL\",\r\n        \"numero\": \"129811F1759228\",\r\n        \"descricao\": \"\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/contato/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contato",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST/contato",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"idPessoa\": 45,\r\n        \"tipoContato\": \"RESIDENCIAL\",\r\n        \"numero\": \"1298111705960\",\r\n        \"descricao\": \"wpp\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/contato/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contato",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
