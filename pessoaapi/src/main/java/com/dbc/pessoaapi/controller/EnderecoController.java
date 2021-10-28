@@ -6,12 +6,16 @@ import com.dbc.pessoaapi.entity.Endereco;
 import com.dbc.pessoaapi.entity.Pessoa;
 import com.dbc.pessoaapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
 @RequestMapping("/endereco")
+@Validated
 public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
@@ -32,13 +36,13 @@ public class EnderecoController {
     }
 
     @PostMapping("/{idPessoa}")
-    public Endereco create(@PathVariable("idPessoa") Integer idPessoa,
-                          @RequestBody Endereco endereco) throws Exception {
+    public Endereco create(@PathVariable("idPessoa") @NotNull Integer idPessoa,
+                          @RequestBody @Valid Endereco endereco) throws Exception {
         return enderecoService.create(idPessoa, endereco);
     }
     @PutMapping("/{id}")
-    public Endereco update(@PathVariable("id") Integer id,
-                          @RequestBody Endereco endereco) throws Exception {
+    public Endereco update(@PathVariable("id") @NotNull Integer id,
+                          @RequestBody @Valid Endereco endereco) throws Exception {
         return enderecoService.update(id, endereco);
     }
     @DeleteMapping("/{id}")

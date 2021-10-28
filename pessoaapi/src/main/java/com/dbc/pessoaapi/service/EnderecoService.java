@@ -4,6 +4,7 @@ package com.dbc.pessoaapi.service;
 import com.dbc.pessoaapi.entity.Contato;
 import com.dbc.pessoaapi.entity.Endereco;
 import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.EnderecoRepository;
 import com.dbc.pessoaapi.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class EnderecoService {
     public Endereco create(Integer idPessoa, Endereco endereco) throws Exception {
         Pessoa pessoa = pessoaRepository.list().stream()
                 .filter(x -> x.getIdPessoa().equals(idPessoa))
-                .findFirst().orElseThrow(() -> new Exception("Pessoa não encontrada"));
+                .findFirst().orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrado"));
         endereco.setIdPessoa(pessoa.getIdPessoa());
         return enderecoRepository.create(endereco);
     }

@@ -2,14 +2,20 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.entity.Pessoa;
 import com.dbc.pessoaapi.service.PessoaService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pessoa")
+@Validated
 public class PessoaController {
 
     @Autowired
@@ -22,8 +28,8 @@ public class PessoaController {
     }
 
     @PostMapping
-    public Pessoa create(@RequestBody Pessoa pessoa) throws Exception {
-        return pessoaService.create(pessoa);
+    public ResponseEntity<Pessoa> create(@RequestBody @Valid Pessoa pessoa) throws Exception {
+        return ResponseEntity.ok(pessoaService.create(pessoa));
     }
 
     @GetMapping
@@ -38,8 +44,8 @@ public class PessoaController {
 
 
     @PutMapping("/{idPessoa}")
-    public Pessoa update(@PathVariable("idPessoa") Integer id,
-                         @RequestBody Pessoa pessoaAtualizar) throws Exception {
+    public Pessoa update(@PathVariable("idPessoa")  @NotNull Integer id,
+                         @RequestBody @Valid Pessoa pessoaAtualizar) throws Exception {
         return pessoaService.update(id, pessoaAtualizar);
     }
 

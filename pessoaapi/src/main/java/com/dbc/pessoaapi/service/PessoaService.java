@@ -1,6 +1,7 @@
 package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.PessoaRepository;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -17,14 +18,14 @@ public class PessoaService {
 
 
     public Pessoa create(Pessoa pessoa) throws Exception {
-        if (StringUtils.isBlank(pessoa.getNome())) {
-            throw new Exception("Nome não encontrado");
-        }
-        if (ObjectUtils.isEmpty(pessoa.getDataNascimento())) {
-            throw new Exception("Data de nascimento obrigatoria");
-        }
-        if (StringUtils.length(pessoa.getCpf()) != 11) {
-            throw new Exception("CPF deve conter 11 digitos");
+//        if (StringUtils.isBlank(pessoa.getNome())) {
+//            throw new Exception("Nome não encontrado");
+//        }
+//        if (ObjectUtils.isEmpty(pessoa.getDataNascimento())) {
+//            throw new Exception("Data de nascimento obrigatoria");
+//        }
+        if (StringUtils.isBlank(pessoa.getCpf()) || StringUtils.length(pessoa.getCpf()) != 11) {
+            throw new RegraDeNegocioException("cpf não informada ou deve ser igual a 11");
         }
 
         return pessoaRepository.create(pessoa);

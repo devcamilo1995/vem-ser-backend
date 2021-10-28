@@ -3,6 +3,7 @@ package com.dbc.pessoaapi.repository;
 import com.dbc.pessoaapi.entity.Contato;
 import com.dbc.pessoaapi.entity.Pessoa;
 import com.dbc.pessoaapi.entity.TipoContato;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -21,11 +22,16 @@ public class ContatoRepository {
         listaContatos.add(new Contato(COUNTER.incrementAndGet(),3, TipoContato.ofTipo(1),"12981117596","wpp"));
     }
 
-    public Contato create(Integer idPessoa, Contato contato) {
-        contato.setIdContato(COUNTER.incrementAndGet());
-        contato.setIdPessoa(idPessoa);
-        listaContatos.add(contato);
-        return contato;
+    public Contato create(Integer idPessoa, Contato contato) throws RegraDeNegocioException {
+
+                contato = listaContatos.stream()
+                    .filter(x -> x.getIdPessoa().equals(idPessoa))
+                    .findFirst()
+                    .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
+                contato.setIdContato(COUNTER.incrementAndGet());
+            listaContatos.add(contato);
+            return contato;
+
     }
     public List<Contato> list() {
         return listaContatos;
@@ -36,7 +42,7 @@ public class ContatoRepository {
         Contato contatoRecuperado = listaContatos.stream()
                 .filter(contato -> contato.getIdContato().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Contato não encontrado"));
+                .orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado"));
         contatoRecuperado.setTipoContato(contatoAtualizar.getTipoContato());
         contatoRecuperado.setNumero(contatoAtualizar.getNumero());
         contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
@@ -48,7 +54,7 @@ public class ContatoRepository {
         Contato contatoRecuperado = listaContatos.stream()
                 .filter(contato -> contato.getIdContato().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Contato não encontrado"));
+                .orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado"));
         listaContatos.remove(contatoRecuperado);
     }
     public List<Contato> listByNumero(String numero) {

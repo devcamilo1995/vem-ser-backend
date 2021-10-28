@@ -2,6 +2,7 @@ package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.entity.Contato;
 import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class ContatoService {
     private ContatoRepository contatoRepository;
 
 
-    public Contato create(Integer idPessoa, Contato contato){return contatoRepository.create(idPessoa,contato);
+    public Contato create(Integer idPessoa, Contato contato) throws RegraDeNegocioException {return contatoRepository.create(idPessoa,contato);
     }
 
     public List<Contato> list(){

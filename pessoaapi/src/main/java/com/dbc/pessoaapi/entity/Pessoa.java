@@ -1,11 +1,19 @@
 package com.dbc.pessoaapi.entity;
 
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class Pessoa {
     private Integer idPessoa;
+    @NotEmpty
+    @NotBlank
     private String nome;
+    @NotNull
+    @Past
     private LocalDate dataNascimento;
+    @NotEmpty
+    @NotBlank
+    @Size(max = 11, min = 11)
     private String cpf;
 
     public Pessoa() {
