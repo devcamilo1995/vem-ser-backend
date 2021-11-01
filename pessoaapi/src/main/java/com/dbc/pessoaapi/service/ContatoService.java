@@ -1,7 +1,6 @@
 package com.dbc.pessoaapi.service;
 
-import com.dbc.pessoaapi.entity.Contato;
-import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.entity.ContatoEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +13,26 @@ public class ContatoService {
     private ContatoRepository contatoRepository;
 
 
-    public Contato create(Integer idPessoa, Contato contato) throws RegraDeNegocioException {return contatoRepository.create(idPessoa,contato);
+    public ContatoEntity create(Integer idPessoa, ContatoEntity contatoEntity) throws RegraDeNegocioException {return contatoRepository.create(idPessoa, contatoEntity);
     }
 
-    public List<Contato> list(){
+    public List<ContatoEntity> list(){
         return contatoRepository.list();
 
     }
-    public Contato update(Integer id,
-                         Contato contatoAtualizar) throws Exception {
-        return contatoRepository.update(id, contatoAtualizar);
+    public ContatoEntity update(Integer id,
+                                ContatoEntity contatoEntityAtualizar) throws Exception {
+        return contatoRepository.update(id, contatoEntityAtualizar);
     }
 
     public void delete (Integer id) throws Exception {
             contatoRepository.delete(id);
         }
-    public List<Contato> listByNumero(String numero) {
+    public List<ContatoEntity> listByNumero(String numero) {
         return contatoRepository.listByNumero(numero);
     }
 
-    public List<Contato> listByIdPessoa(Integer idPessoa) {
+    public List<ContatoEntity> listByIdPessoa(Integer idPessoa) {
         return contatoRepository.listByIdPessoa(idPessoa);
     }
 }

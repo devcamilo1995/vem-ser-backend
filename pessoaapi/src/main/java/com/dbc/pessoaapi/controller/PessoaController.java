@@ -1,25 +1,27 @@
 package com.dbc.pessoaapi.controller;
 
-import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.dto.PessoaCreateDTO;
+import com.dbc.pessoaapi.dto.PessoaDTO;
+import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.service.PessoaService;
-import org.apache.coyote.Response;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pessoa")
 @Validated
+@Slf4j
+@RequiredArgsConstructor
 public class PessoaController {
 
-    @Autowired
-    private PessoaService pessoaService;
+    private final PessoaService pessoaService;
 
 
     @GetMapping("/hello")
@@ -28,29 +30,38 @@ public class PessoaController {
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> create(@RequestBody @Valid Pessoa pessoa) throws Exception {
-        return ResponseEntity.ok(pessoaService.create(pessoa));
+    public PessoaDTO create(@RequestBody @Valid PessoaCreateDTO pessoaDTO) throws Exception {
+        log.info("Criando pessoa");
+        PessoaDTO pessoaEntityCriar = pessoaService.create(pessoaDTO);
+        log.info("pessoa criada");
+        return pessoaEntityCriar;
     }
 
     @GetMapping
-    public List<Pessoa> list() {
+    public List<PessoaDTO> list() {
         return pessoaService.list();
     }
 
     @GetMapping("/byname")
-    public List<Pessoa> listByName(@RequestParam("nome") String nome) {
+    public List<PessoaDTO> listByName(@RequestParam("nome") String nome) {
         return pessoaService.listByName(nome);
     }
 
 
     @PutMapping("/{idPessoa}")
-    public Pessoa update(@PathVariable("idPessoa")  @NotNull Integer id,
-                         @RequestBody @Valid Pessoa pessoaAtualizar) throws Exception {
-        return pessoaService.update(id, pessoaAtualizar);
+    public PessoaDTO update(@PathVariable("idPessoa") Integer id,
+                               @RequestBody @Valid PessoaCreateDTO pessoaCreateDTO) throws Exception {
+        log.info("Atualizar pessoa");
+        PessoaDTO pessoaEntityAtt = pessoaService.update(id, pessoaCreateDTO);
+        log.info("Pessoa atualizada");
+        return pessoaEntityAtt;
     }
 
+
     @DeleteMapping("/{idPessoa}")
-    public void delete(@PathVariable("idPessoa") Integer id) throws Exception {
+    public void delete(@PathVariable("idPessoa") @NotNull Integer id) throws Exception {
+        log.info("Deletando pessoa");
         pessoaService.delete(id);
+        log.info("Pessoa deletada");
     }
 }

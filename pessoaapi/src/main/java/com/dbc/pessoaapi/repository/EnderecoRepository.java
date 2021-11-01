@@ -1,9 +1,7 @@
 package com.dbc.pessoaapi.repository;
 
 
-import com.dbc.pessoaapi.entity.Contato;
-import com.dbc.pessoaapi.entity.Endereco;
-import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.TipoEndereco;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
@@ -15,56 +13,56 @@ import java.util.stream.Collectors;
 
 @Repository
 public class EnderecoRepository {
-    private static List<Endereco> enderecoList = new ArrayList<>();
+    private static List<EnderecoEntity> enderecoEntityList = new ArrayList<>();
     private AtomicInteger COUNTER = new AtomicInteger();
 
     public EnderecoRepository() {
-        enderecoList.add(new Endereco(COUNTER.incrementAndGet(),1, TipoEndereco.ofTipo(1),"um",484,"Não tem","12504-010","Guaratingueta","São Paulo","Brasil"));
-        enderecoList.add(new Endereco(COUNTER.incrementAndGet(),2, TipoEndereco.ofTipo(1),"dois",484,"Não tem","12504-010","Guaratingueta","São Paulo","Brasil"));
-        enderecoList.add(new Endereco(COUNTER.incrementAndGet(),3, TipoEndereco.ofTipo(1),"tres",484,"Não tem","12504-010","Guaratingueta","São Paulo","Brasil"));
+        enderecoEntityList.add(new EnderecoEntity(COUNTER.incrementAndGet(),1, TipoEndereco.ofTipo(1),"um",484,"Não tem","12504-010","Guaratingueta","São Paulo","Brasil"));
+        enderecoEntityList.add(new EnderecoEntity(COUNTER.incrementAndGet(),2, TipoEndereco.ofTipo(1),"dois",484,"Não tem","12504-010","Guaratingueta","São Paulo","Brasil"));
+        enderecoEntityList.add(new EnderecoEntity(COUNTER.incrementAndGet(),3, TipoEndereco.ofTipo(1),"tres",484,"Não tem","12504-010","Guaratingueta","São Paulo","Brasil"));
 }
 
 
-    public Endereco create(Endereco endereco) {
-        endereco.setIdEndereco(COUNTER.incrementAndGet());
-        enderecoList.add(endereco);
-        return endereco;
+    public EnderecoEntity create(EnderecoEntity enderecoEntity) {
+        enderecoEntity.setIdEndereco(COUNTER.incrementAndGet());
+        enderecoEntityList.add(enderecoEntity);
+        return enderecoEntity;
     }
-    public Endereco update(Integer id, Endereco endereco) throws Exception {
-        Endereco enderecoAlterado = enderecoList.stream()
+    public EnderecoEntity update(Integer id, EnderecoEntity enderecoEntity) throws Exception {
+        EnderecoEntity enderecoEntityAlterado = enderecoEntityList.stream()
                 .filter(x -> x.getIdEndereco().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrado"));
-        enderecoAlterado.setTipo(endereco.getTipo());
-        enderecoAlterado.setLogradouro(endereco.getLogradouro());
-        enderecoAlterado.setNumero(endereco.getNumero());
-        enderecoAlterado.setComplemento(endereco.getComplemento());
-        enderecoAlterado.setCep(endereco.getCep());
-        enderecoAlterado.setCep(endereco.getCidade());
-        enderecoAlterado.setEstado(endereco.getEstado());
-        enderecoAlterado.setPais(endereco.getPais());
-        return enderecoAlterado;
+        enderecoEntityAlterado.setTipo(enderecoEntity.getTipo());
+        enderecoEntityAlterado.setLogradouro(enderecoEntity.getLogradouro());
+        enderecoEntityAlterado.setNumero(enderecoEntity.getNumero());
+        enderecoEntityAlterado.setComplemento(enderecoEntity.getComplemento());
+        enderecoEntityAlterado.setCep(enderecoEntity.getCep());
+        enderecoEntityAlterado.setCep(enderecoEntity.getCidade());
+        enderecoEntityAlterado.setEstado(enderecoEntity.getEstado());
+        enderecoEntityAlterado.setPais(enderecoEntity.getPais());
+        return enderecoEntityAlterado;
     }
 
-    public List<Endereco> list() {
-        return enderecoList;
+    public List<EnderecoEntity> list() {
+        return enderecoEntityList;
     }
 
-    public List<Endereco> listByIdEndereco(Integer idEndereco)  {
-        return enderecoList.stream()
+    public List<EnderecoEntity> listByIdEndereco(Integer idEndereco)  {
+        return enderecoEntityList.stream()
                 .filter(x -> x.getIdEndereco().equals(idEndereco))
                 .collect(Collectors.toList());
     }
-    public List<Endereco> listByIdPessoa(Integer idPessoa) {
-        return enderecoList.stream()
+    public List<EnderecoEntity> listByIdPessoa(Integer idPessoa) {
+        return enderecoEntityList.stream()
                 .filter(x -> x.getIdPessoa().equals(idPessoa))
                 .collect(Collectors.toList());
     }
     public void delete(Integer id) throws Exception {
-        Endereco endereco = enderecoList.stream()
+        EnderecoEntity enderecoEntity = enderecoEntityList.stream()
                 .filter(x -> x.getIdEndereco().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("Endereço não encontrado"));
-        enderecoList.remove(endereco);
+        enderecoEntityList.remove(enderecoEntity);
     }
 }

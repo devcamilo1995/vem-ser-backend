@@ -1,9 +1,8 @@
 package com.dbc.pessoaapi.service;
 
 
-import com.dbc.pessoaapi.entity.Contato;
-import com.dbc.pessoaapi.entity.Endereco;
-import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.entity.EnderecoEntity;
+import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.EnderecoRepository;
 import com.dbc.pessoaapi.repository.PessoaRepository;
@@ -23,27 +22,27 @@ public class EnderecoService {
         enderecoRepository.delete(id);
     }
 
-    public Endereco create(Integer idPessoa, Endereco endereco) throws Exception {
-        Pessoa pessoa = pessoaRepository.list().stream()
+    public EnderecoEntity create(Integer idPessoa, EnderecoEntity enderecoEntity) throws Exception {
+        PessoaEntity pessoaEntity = pessoaRepository.list().stream()
                 .filter(x -> x.getIdPessoa().equals(idPessoa))
                 .findFirst().orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrado"));
-        endereco.setIdPessoa(pessoa.getIdPessoa());
-        return enderecoRepository.create(endereco);
+        enderecoEntity.setIdPessoa(pessoaEntity.getIdPessoa());
+        return enderecoRepository.create(enderecoEntity);
     }
 
-    public Endereco update(Integer id, Endereco endereco) throws Exception {
-        return enderecoRepository.update(id, endereco);
+    public EnderecoEntity update(Integer id, EnderecoEntity enderecoEntity) throws Exception {
+        return enderecoRepository.update(id, enderecoEntity);
     }
 
 
-    public List<Endereco> list() {
+    public List<EnderecoEntity> list() {
         return enderecoRepository.list();
     }
 
-    public List<Endereco> listByIdEndereco(Integer idEndereco) {
+    public List<EnderecoEntity> listByIdEndereco(Integer idEndereco) {
         return enderecoRepository.listByIdEndereco(idEndereco);
     }
-    public List<Endereco> listByIdPessoa(Integer idPessoa) {
+    public List<EnderecoEntity> listByIdPessoa(Integer idPessoa) {
         return enderecoRepository.listByIdPessoa(idPessoa);
     }
 }
