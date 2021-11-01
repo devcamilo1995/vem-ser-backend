@@ -1,5 +1,6 @@
 package com.dbc.pessoaapi.service;
 
+import com.dbc.pessoaapi.PessoaApiApplication;
 import com.dbc.pessoaapi.dto.PessoaCreateDTO;
 import com.dbc.pessoaapi.dto.PessoaDTO;
 import com.dbc.pessoaapi.entity.PessoaEntity;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class PessoaService {
     private final PessoaRepository pessoaRepository;
     private final ObjectMapper objectMapper;
+    private final EmailService emailService;
 
 
     public PessoaDTO create(PessoaCreateDTO pessoaCreateDTO) throws Exception {
@@ -26,6 +28,7 @@ public class PessoaService {
         PessoaEntity pessoaCriar = pessoaRepository.create(pessoaEntity);
 
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaCriar, PessoaDTO.class);
+        emailService.enviarEmailSimples(pessoaDTO);
         return pessoaDTO;
         }
 
@@ -41,12 +44,16 @@ public class PessoaService {
             PessoaEntity entity = objectMapper.convertValue(pessoaCreateDTO, PessoaEntity.class);
             PessoaEntity update = pessoaRepository.update(id, entity);
             PessoaDTO dto = objectMapper.convertValue(update, PessoaDTO.class);
+            emailService.enviarEmailComTemplate(dto);
             return dto;
 
         }
 
         public void delete (Integer id) throws Exception {
+            PessoaEntity pessoaDeletada = pessoaRepository.buscarPorId(id);
             pessoaRepository.delete(id);
+            PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaDeletada,PessoaDTO.class);
+            emailService.enviarEmailComTemplateDelete(pessoaDTO);
         }
 
         public List<PessoaDTO> listByName (String nome){
