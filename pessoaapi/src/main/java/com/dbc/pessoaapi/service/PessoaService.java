@@ -28,7 +28,7 @@ public class PessoaService {
         PessoaEntity pessoaCriar = pessoaRepository.create(pessoaEntity);
 
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaCriar, PessoaDTO.class);
-        emailService.enviarEmailSimples(pessoaDTO);
+//        emailService.enviarEmailSimples(pessoaDTO);
         return pessoaDTO;
         }
 
@@ -44,7 +44,7 @@ public class PessoaService {
             PessoaEntity entity = objectMapper.convertValue(pessoaCreateDTO, PessoaEntity.class);
             PessoaEntity update = pessoaRepository.update(id, entity);
             PessoaDTO dto = objectMapper.convertValue(update, PessoaDTO.class);
-            emailService.enviarEmailComTemplate(dto);
+//            emailService.enviarEmailComTemplate(dto);
             return dto;
 
         }
@@ -53,7 +53,7 @@ public class PessoaService {
             PessoaEntity pessoaDeletada = pessoaRepository.buscarPorId(id);
             pessoaRepository.delete(id);
             PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaDeletada,PessoaDTO.class);
-            emailService.enviarEmailComTemplateDelete(pessoaDTO);
+//            emailService.enviarEmailComTemplateDelete(pessoaDTO);
         }
 
         public List<PessoaDTO> listByName (String nome){

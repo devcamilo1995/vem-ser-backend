@@ -21,15 +21,11 @@ public class ContatoRepository {
         listaContatoEntities.add(new ContatoEntity(COUNTER.incrementAndGet(),3, TipoContato.ofTipo(1),"12981117596","wpp"));
     }
 
-    public ContatoEntity create(Integer idPessoa, ContatoEntity contatoEntity) throws RegraDeNegocioException {
+    public ContatoEntity create(ContatoEntity contatoEntity) throws RegraDeNegocioException {
 
-                contatoEntity = listaContatoEntities.stream()
-                    .filter(x -> x.getIdPessoa().equals(idPessoa))
-                    .findFirst()
-                    .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
-                contatoEntity.setIdContato(COUNTER.incrementAndGet());
-            listaContatoEntities.add(contatoEntity);
-            return contatoEntity;
+        contatoEntity.setIdContato(COUNTER.incrementAndGet());
+        listaContatoEntities.add(contatoEntity);
+        return contatoEntity;
 
     }
     public List<ContatoEntity> list() {

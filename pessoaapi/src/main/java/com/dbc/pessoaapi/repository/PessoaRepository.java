@@ -65,7 +65,7 @@ public class PessoaRepository {
         PessoaEntity pessoaEntityRecuperada = listaPessoaEntities.stream()
                 .filter(pessoaEntity -> pessoaEntity.getIdPessoa().equals(idPessoa))
                 .findFirst()
-                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não econtrada"));
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
         return pessoaEntityRecuperada;
     }
 }
