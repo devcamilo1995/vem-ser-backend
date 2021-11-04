@@ -32,9 +32,9 @@ public class EnderecoController {
 
     @ApiOperation(value = "Lista todos os endereços")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "endereços listados com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Endereços listados com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping
     public List<EnderecoDTO> list() {
@@ -44,9 +44,9 @@ public class EnderecoController {
 
     @ApiOperation(value = "Endereços listados pelo ID")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "endereços listados com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Endereços listados com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping("/idendereco")
     public List<EnderecoDTO> listByIdEndereco(@RequestParam("idEndereco") Integer idEndereco) {
@@ -55,9 +55,9 @@ public class EnderecoController {
     }
     @ApiOperation(value = "Endereços listado pelo ID da pessoa")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "endereços listados com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Endereços listados com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping("/{idPessoa}/pessoa")
     public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
@@ -66,9 +66,9 @@ public class EnderecoController {
 
     @ApiOperation(value = "Anexa um endereço por ID da pessoa")
     @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "endereço anexado com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Endereço anexado com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @PostMapping("/{idPessoa}")
     public EnderecoDTO create(@PathVariable("idPessoa")  Integer idPessoa,
@@ -81,9 +81,9 @@ public class EnderecoController {
 
     @ApiOperation(value = "Atualiza um endereço por ID")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "endereço atualizado com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Endereço atualizado com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @PutMapping("/{id}")
     public EnderecoDTO update(@PathVariable("id") @NotNull Integer id,
@@ -97,9 +97,9 @@ public class EnderecoController {
 
     @ApiOperation(value = "Deleta um endereço por ID")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "endereço deletado com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Endereço deletado com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Integer id) throws Exception {

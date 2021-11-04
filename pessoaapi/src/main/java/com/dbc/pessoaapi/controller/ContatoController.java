@@ -29,31 +29,31 @@ public class ContatoController {
 
     @ApiOperation(value = "Lista todos os contatos")
     @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "contatos listados com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Contatos listados com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping
     public List<ContatoDTO> list() {
         return contatoService.list();
     }
 
-    @ApiOperation(value = "Lista todos os contatos por ID pessoa")
+    @ApiOperation(value = "Lista todos os contatos por ID da pessoa")
     @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "contatos listados com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Contatos listados com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping("/byidpessoa")
     public List<ContatoDTO> listByIdPessoa(@RequestParam("idPessoa") Integer idPessoa) {
         return contatoService.listByIdPessoa(
                 idPessoa);
     }
-    @ApiOperation(value = "Deleta um contato por ID")
+    @ApiOperation(value = "Deleta um contato")
     @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "contatos deletado com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Contato deletado com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @DeleteMapping("/{idContato}")
     public void delete(@PathVariable("idContato") Integer id) throws Exception {
@@ -62,11 +62,11 @@ public class ContatoController {
         log.info("Contato deletado");
     }
 
-    @ApiOperation(value = "Atualiza um contato pelo ID")
+    @ApiOperation(value = "Atualiza um contato")
     @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "contatos atualizado com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Contato atualizado com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @PutMapping("/{idContato}")
     public ContatoDTO update(@PathVariable("idContato") @NotNull Integer id,
@@ -79,9 +79,9 @@ public class ContatoController {
 
     @ApiOperation(value = "Cria um contato pelo ID da Pessoa")
     @ApiResponses(value ={
-            @ApiResponse(code = 200, message = "contato criado com sucesso"),
-            @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada um exceção"),
+            @ApiResponse(code = 200, message = "Contato criado com sucesso"),
+            @ApiResponse(code = 400, message = "Algum dado inconsistente"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @PostMapping("/{idPessoa}")
     public ContatoDTO create(@PathVariable("idPessoa") @NotNull Integer idPessoa,
