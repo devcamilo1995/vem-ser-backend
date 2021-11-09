@@ -3,6 +3,7 @@ package com.dbc.pessoaapi.controller;
 import com.dbc.pessoaapi.dto.PessoaCreateDTO;
 import com.dbc.pessoaapi.dto.PessoaDTO;
 import com.dbc.pessoaapi.entity.PessoaEntity;
+import com.dbc.pessoaapi.repository.PessoaRepository;
 import com.dbc.pessoaapi.service.PessoaService;
 import io.swagger.annotations.ApiOperation;
 
@@ -10,12 +11,16 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,10 +31,10 @@ import java.util.List;
 public class PessoaController {
 
     private final PessoaService pessoaService;
-
+    private final PessoaRepository pessoaRepository;
 
     @ApiOperation(value = "Cria uma pessoa")
-    @ApiResponses(value ={
+    @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Pessoa criada com sucesso"),
             @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada um exceção"),
@@ -43,7 +48,7 @@ public class PessoaController {
     }
 
     @ApiOperation(value = "Retorna uma lista de pessoas")
-    @ApiResponses(value ={
+    @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a lista de pessoas"),
             @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada um exceção"),
@@ -54,14 +59,14 @@ public class PessoaController {
     }
 
     @ApiOperation(value = "Atualiza uma pessoa pelo ID")
-    @ApiResponses(value ={
+    @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Pessoa atualizada com sucesso"),
             @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada um exceção"),
     })
     @PutMapping("/{idPessoa}")
     public PessoaDTO update(@PathVariable("idPessoa") Integer id,
-                               @RequestBody @Valid PessoaCreateDTO pessoaCreateDTO) throws Exception {
+                            @RequestBody @Valid PessoaCreateDTO pessoaCreateDTO) throws Exception {
         log.info("Atualizar pessoa");
         PessoaDTO pessoaEntityAtt = pessoaService.update(id, pessoaCreateDTO);
         log.info("Pessoa atualizada");
@@ -69,7 +74,7 @@ public class PessoaController {
     }
 
     @ApiOperation(value = "Deleta uma pessoa pelo ID")
-    @ApiResponses(value ={
+    @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Pessoa deletada com sucesso"),
             @ApiResponse(code = 400, message = "Você não tem permissão para acessar este recurso"),
             @ApiResponse(code = 500, message = "Foi gerada um exceção"),
@@ -79,5 +84,22 @@ public class PessoaController {
         log.info("Deletando pessoa");
         pessoaService.delete(id);
         log.info("Pessoa deletada");
+    }
+
+    @GetMapping("/find-by-nome-containing-ignorecase")
+    public List<PessoaEntity> findByNomeContainingIgnoreCase(@RequestParam String nome) {
+        return pessoaRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    @GetMapping("/find-by-cpf")
+    public List<PessoaEntity> findByCpf(@RequestParam String cpf) {
+        return pessoaRepository.findByCpf(cpf);
+    }
+    @GetMapping("/find-by-data-nascimento")
+    public List< PessoaEntity> findByDataNascimento(@RequestParam("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
+
+                                                    @RequestParam("fim") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fim){
+
+        return pessoaRepository.findByDataNascimentoBetween(inicio, fim);
     }
 }
