@@ -1,7 +1,10 @@
 package com.dbc.pessoaapi.controller;
 
+import com.dbc.pessoaapi.dto.PessoaContatoDTO;
 import com.dbc.pessoaapi.dto.PessoaCreateDTO;
 import com.dbc.pessoaapi.dto.PessoaDTO;
+import com.dbc.pessoaapi.dto.PessoaEnderecoDTO;
+import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.repository.PessoaRepository;
 import com.dbc.pessoaapi.service.PessoaService;
@@ -11,8 +14,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -95,11 +95,43 @@ public class PessoaController {
     public List<PessoaEntity> findByCpf(@RequestParam String cpf) {
         return pessoaRepository.findByCpf(cpf);
     }
+
     @GetMapping("/find-by-data-nascimento")
-    public List< PessoaEntity> findByDataNascimento(@RequestParam("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
+    public List< PessoaEntity> findByDataNascimentoBetween(@RequestParam("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
 
                                                     @RequestParam("fim") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fim){
 
         return pessoaRepository.findByDataNascimentoBetween(inicio, fim);
     }
+
+
+    @GetMapping("/list-with-contato")
+    public List<PessoaContatoDTO> ListWithContato (){
+        return pessoaService.listWithContato();
+    }
+
+    @GetMapping("/list-with-endereco")
+    public List<PessoaEnderecoDTO> ListWithEndereco (){
+        return pessoaService.listWithEndereco();
+    }
+    @GetMapping("/procurar-pessoas-com-endereco")
+    public List<PessoaEntity> procurarPessoasComEndereco (){
+        return pessoaRepository.procurarPessoasComEndereco();
+    }
+    @GetMapping("/find-pessoa-by-data-nascimento")
+    public List< PessoaEntity> procurarPessoasPorDataNascimento(@RequestParam ("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
+
+                                                           @RequestParam ("fim") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fim){
+
+        return pessoaRepository.procurarPessoasPorDataNascimento(inicio, fim);
+    }
+
+    @GetMapping("/procurar-pessoas-endereco-nulo")
+    public List<PessoaEntity> procurarPessoasComEnderecoNulo() {
+        return pessoaRepository.procurarPessoasComEnderecoNull();
+
+
+    }
 }
+
+

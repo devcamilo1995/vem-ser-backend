@@ -1,8 +1,7 @@
 package com.dbc.pessoaapi.service;
 
 
-import com.dbc.pessoaapi.dto.PessoaCreateDTO;
-import com.dbc.pessoaapi.dto.PessoaDTO;
+import com.dbc.pessoaapi.dto.*;
 import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.PessoaRepository;
@@ -17,6 +16,7 @@ import java.util.stream.Collectors;
 public class PessoaService {
     private final PessoaRepository pessoaRepository;
     private final ObjectMapper objectMapper;
+
 
 
     public PessoaDTO create(PessoaCreateDTO pessoaCreateDTO) throws Exception {
@@ -61,5 +61,37 @@ public class PessoaService {
                 .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
         return entity;
         }
+
+        public List <PessoaContatoDTO> listWithContato(){
+        return pessoaRepository.findAll().stream()
+                .map(pessoa -> {
+                    PessoaContatoDTO pessoaContatoDTO = objectMapper.convertValue(pessoa, PessoaContatoDTO.class);
+                    pessoaContatoDTO.setContatoDTOList(pessoa.getContatos().stream()
+                            .map(contato -> {
+                                ContatoDTO contatoDTO = objectMapper.convertValue(contato, ContatoDTO.class);
+                                return contatoDTO;
+                            })
+                            .collect(Collectors.toList()));
+                    return pessoaContatoDTO;
+                })
+                .collect(Collectors.toList());
+        }
+
+    public List <PessoaEnderecoDTO> listWithEndereco(){
+        return pessoaRepository.findAll().stream()
+                .map(pessoa -> {
+                    PessoaEnderecoDTO pessoaEnderecoDTO = objectMapper.convertValue(pessoa, PessoaEnderecoDTO.class);
+                    pessoaEnderecoDTO.setEnderecoDTOList(pessoa.getEnderecos().stream()
+                            .map(endereco -> {
+                                EnderecoDTO enderecoDTO = objectMapper.convertValue(endereco, EnderecoDTO.class);
+                                return enderecoDTO;
+                            })
+                            .collect(Collectors.toList()));
+                    return pessoaEnderecoDTO;
+                })
+                .collect(Collectors.toList());
     }
+}
+
+
 

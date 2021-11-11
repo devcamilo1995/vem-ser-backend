@@ -1,14 +1,13 @@
 package com.dbc.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 @Entity(name = "ENDERECO_PESSOA")
 public class EnderecoEntity {
     @Id
@@ -16,7 +15,6 @@ public class EnderecoEntity {
     @SequenceGenerator(name = "ENDERECO_SEQUENCIA",sequenceName = "seq_endereco_contato",allocationSize = 1)
     @Column(name = "id_endereco")
     private Integer idEndereco;
-
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "tipo")
     private TipoEndereco tipo;
@@ -34,4 +32,8 @@ public class EnderecoEntity {
     private String estado;
     @Column(name = "pais")
     private String pais;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<PessoaEntity> pessoa;
 }

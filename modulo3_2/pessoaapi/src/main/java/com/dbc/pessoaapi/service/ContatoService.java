@@ -32,7 +32,6 @@ public class ContatoService {
                 .filter(contato -> contato.getIdPessoa().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
-        contatoEntity.setIdPessoa(id);
         ContatoEntity contatoCriar = contatoRepository.save(contatoEntity);
         ContatoDTO contatoDTO= objectMapper.convertValue(contatoCriar, ContatoDTO.class);
         return contatoDTO;
