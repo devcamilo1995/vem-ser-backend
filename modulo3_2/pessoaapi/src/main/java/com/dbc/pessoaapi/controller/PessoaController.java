@@ -1,11 +1,9 @@
 package com.dbc.pessoaapi.controller;
 
-import com.dbc.pessoaapi.dto.PessoaContatoDTO;
-import com.dbc.pessoaapi.dto.PessoaCreateDTO;
-import com.dbc.pessoaapi.dto.PessoaDTO;
-import com.dbc.pessoaapi.dto.PessoaEnderecoDTO;
+import com.dbc.pessoaapi.dto.*;
 import com.dbc.pessoaapi.entity.EnderecoEntity;
 import com.dbc.pessoaapi.entity.PessoaEntity;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.PessoaRepository;
 import com.dbc.pessoaapi.service.PessoaService;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/pessoa")
@@ -106,18 +106,31 @@ public class PessoaController {
 
 
     @GetMapping("/list-with-contato")
-    public List<PessoaContatoDTO> ListWithContato (){
-        return pessoaService.listWithContato();
+    public List<PessoaContatoDTO> ListWithContato (@RequestParam(required = false) Integer idPessoa) throws RegraDeNegocioException {
+        return pessoaService.listWithContato(idPessoa);
     }
 
     @GetMapping("/list-with-endereco")
-    public List<PessoaEnderecoDTO> ListWithEndereco (){
-        return pessoaService.listWithEndereco();
+    public List<PessoaEnderecoDTO> ListWithEndereco (@RequestParam(required = false) Integer idPessoa) throws RegraDeNegocioException {
+        return pessoaService.listWithEndereco(idPessoa);
     }
+
+
+
+
+
+
+
+
     @GetMapping("/procurar-pessoas-com-endereco")
     public List<PessoaEntity> procurarPessoasComEndereco (){
         return pessoaRepository.procurarPessoasComEndereco();
     }
+
+
+
+
+
     @GetMapping("/find-pessoa-by-data-nascimento")
     public List< PessoaEntity> procurarPessoasPorDataNascimento(@RequestParam ("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate inicio,
 
@@ -133,5 +146,6 @@ public class PessoaController {
 
     }
 }
+
 
 
