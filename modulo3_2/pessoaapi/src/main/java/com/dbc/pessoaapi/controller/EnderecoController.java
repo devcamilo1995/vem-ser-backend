@@ -99,8 +99,9 @@ public class EnderecoController {
     }
 
     @GetMapping("/procurar-endereco-por-pais-ou-cidade-nativo")
-    public List<EnderecoEntity> getEnderecoByPaisOuCidade(@RequestParam("pS") String paisCidade) {
-        return enderecoRepository.getEnderecoByPaisOuCidade(paisCidade);
+    public List<EnderecoEntity> getEnderecoByPaisOuCidade(@RequestParam(required = false) String pais,
+                                                            @RequestParam(required = false) String cidade){
+        return enderecoRepository.getEnderecoByPaisOuCidade(pais,cidade);
     }
 
     @GetMapping("/procurar-endereco-complemento-nulo")
