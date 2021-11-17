@@ -21,7 +21,7 @@ class PessoaApiApplicationTests {
 		PessoaDTO pessoaDTO = new PessoaDTO();
 //		emailService.enviarEmailSimples();
 //		emailService.enviarEmailComAnexos();
-		emailService.enviarEmailComTemplate(pessoaDTO);
+//		emailService.enviarEmailComTemplate(pessoaDTO);
 //		emailService.enviarEmailComTemplateAndAnexos();
 	}
 
