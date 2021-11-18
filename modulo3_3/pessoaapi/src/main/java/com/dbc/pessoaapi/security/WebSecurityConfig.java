@@ -3,6 +3,7 @@ package com.dbc.pessoaapi.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,9 +31,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable().and().cors().and()
                 .csrf().disable()
                 .authorizeRequests()
+
                 .antMatchers("/").permitAll()
                 .antMatchers("/auth").permitAll()
 //                .antMatchers("/contato").permitAll()
+                // =
+//                .antMatchers("/", "/auth", "/contato").permitAll()
+
+                .antMatchers(HttpMethod.POST,"/AUTH/CREATE").hasRole("ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/pessoa/**","/contato/**","/endereco/**").hasAnyRole("MARKETING", "USUARIO", "ADMIN") //ROLE_MARKETING
+
+
+                .antMatchers("/pessoa/**","/contato/**","/endereco/**").hasRole("USUARIO") //ROLE_USUARIO
+
+
+                .antMatchers("/**").hasRole("ADMIN") //ROLE_ADMIN
+
+
+
+
+
 
                 .anyRequest().authenticated()
 
