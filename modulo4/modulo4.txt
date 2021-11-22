@@ -1,0 +1,143 @@
+db.alunos.insertOne({
+    "nome" : "Matheus",
+    "data_nascimento" : new Date (1994,02,26), 
+    "curso" : {
+        "nome" : "Sistemas de informação"
+    },
+    "notas" : [10.0, 9.0, 4.5],
+    "habilidades": [
+        {
+            "nome" : "inglês",
+            "nível" : "avançado"
+        },
+        {
+            "nome" : "taekwondo",
+            "nível" : "básico"
+        }
+    ]
+}
+)
+{ acknowledged: true,
+  insertedId: ObjectId("619bfcd492b96d8e0460b06d") }
+db.alunos.insertOne({
+    "nome" : "Camilo",
+    "data_nascimento" : new Date (1994,02,26), 
+    "curso" : {
+        "nome" : "Sistemas de informação"
+    },
+    "notas" : [10.0, 9.0, 4.5],
+    "habilidades": [
+        {
+            "nome" : "inglês",
+            "nível" : "basico"
+        },
+        {
+            "nome" : "taekwondo",
+            "nível" : "básico"
+        }
+    ]
+}
+)
+{ acknowledged: true,
+  insertedId: ObjectId("619bfcde92b96d8e0460b06e") }
+db.alunos.insertOne({
+    "nome" : "Marcelo",
+    "data_nascimento" : new Date (1994,02,26), 
+    "curso" : {
+        "nome" : "Sistemas de informação"
+    },
+    "notas" : [10.0, 9.0, 4.5],
+    "habilidades": [
+        {
+            "nome" : "inglês",
+            "nível" : "basico"
+        },
+        {
+            "nome" : "taekwondo",
+            "nível" : "básico"
+        }
+    ]
+}
+)
+{ acknowledged: true,
+  insertedId: ObjectId("619bfce892b96d8e0460b06f") }
+db.alunos.deleteOne( "_id": {
+        "$oid": "619bf10792b96d8e0460b06b")
+SyntaxError: Unexpected token, expected "," (1:26)
+
+> 1 | db.alunos.deleteOne( "_id": {
+    |                           ^
+  2 |         "$oid": "619bf10792b96d8e0460b06b")
+db.alu
+vemserdbc.alu
+db.alunos.find()
+{ _id: ObjectId("619bf10792b96d8e0460b06b"),
+  nome: 'Matheus Camilo',
+  data_nascimento: 1990-07-27T03:00:00.000Z }
+{ _id: ObjectId("619bf64592b96d8e0460b06c"),
+  nome: 'João',
+  data_nascimento: 1994-03-26T03:00:00.000Z,
+  curso: { nome: 'Sistemas de informação' },
+  notas: [ 10, 9, 4.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'avançado' },
+     { nome: 'taekwondo', 'nível': 'básico' } ] }
+{ _id: ObjectId("619bfcd492b96d8e0460b06d"),
+  nome: 'Matheus',
+  data_nascimento: 1994-03-26T03:00:00.000Z,
+  curso: { nome: 'Sistemas de informação' },
+  notas: [ 10, 9, 4.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'avançado' },
+     { nome: 'taekwondo', 'nível': 'básico' } ] }
+{ _id: ObjectId("619bfcde92b96d8e0460b06e"),
+  nome: 'Camilo',
+  data_nascimento: 1994-03-26T03:00:00.000Z,
+  curso: { nome: 'Sistemas de informação' },
+  notas: [ 10, 9, 4.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'basico' },
+     { nome: 'taekwondo', 'nível': 'básico' } ] }
+{ _id: ObjectId("619bfce892b96d8e0460b06f"),
+  nome: 'Marcelo',
+  data_nascimento: 1994-03-26T03:00:00.000Z,
+  curso: { nome: 'Sistemas de informação' },
+  notas: [ 10, 9, 4.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'basico' },
+     { nome: 'taekwondo', 'nível': 'básico' } ] }
+db.alunos.deleteOne({ _id: ObjectId("619bfce892b96d8e0460b06f"))
+SyntaxError: Unexpected token, expected "," (1:63)
+
+> 1 | db.alunos.deleteOne({ _id: ObjectId("619bfce892b96d8e0460b06f"))
+    |                                                                ^
+db.alunos.deleteOne({ _id: ObjectId("619bfce892b96d8e0460b06f")})
+{ acknowledged: true, deletedCount: 1 }
+db.alunos.find()
+{ _id: ObjectId("619bf10792b96d8e0460b06b"),
+  nome: 'Matheus Camilo',
+  data_nascimento: 1990-07-27T03:00:00.000Z }
+{ _id: ObjectId("619bf64592b96d8e0460b06c"),
+  nome: 'João',
+  data_nascimento: 1994-03-26T03:00:00.000Z,
+  curso: { nome: 'Sistemas de informação' },
+  notas: [ 10, 9, 4.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'avançado' },
+     { nome: 'taekwondo', 'nível': 'básico' } ] }
+{ _id: ObjectId("619bfcd492b96d8e0460b06d"),
+  nome: 'Matheus',
+  data_nascimento: 1994-03-26T03:00:00.000Z,
+  curso: { nome: 'Sistemas de informação' },
+  notas: [ 10, 9, 4.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'avançado' },
+     { nome: 'taekwondo', 'nível': 'básico' } ] }
+{ _id: ObjectId("619bfcde92b96d8e0460b06e"),
+  nome: 'Camilo',
+  data_nascimento: 1994-03-26T03:00:00.000Z,
+  curso: { nome: 'Sistemas de informação' },
+  notas: [ 10, 9, 4.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'basico' },
+     { nome: 'taekwondo', 'nível': 'básico' } ] }
