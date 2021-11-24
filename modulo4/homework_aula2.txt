@@ -1,0 +1,151 @@
+use vemserdbc
+'switched to db vemserdbc'
+db.usuario.insertOne({ "nome": "Matheus", "cpf":"41286811805","data_nascimento": new Date (1993,01,27),"email": "matheus.camilo16@gmail.com", "login": "matheus"},)
+{ acknowledged: true,
+  insertedId: ObjectId("619d44d93ee7db39046fbbc2") }
+db.usuario([{ "nome": "Leo", "cpf":"41286811804","data_nascimento": new Date (1992,06,29),"email": "leo@gmail.com", "login": "leo"},
+  { "nome": "Tiago", "cpf":"33386811805","data_nascimento": new Date (1993,03,25),"email": "tiago@gmail.com", "login": "tiago"},
+  { "nome": "Gui", "cpf":"99986811805","data_nascimento": new Date (1999,01,27),"email": "gui@gmail.com", "login": "gui"},
+])
+TypeError: db.usuario is not a function
+db.usuario.insertMany([{ "nome": "Leo", "cpf":"41286811804","data_nascimento": new Date (1992,06,29),"email": "leo@gmail.com", "login": "leo"},
+  { "nome": "Tiago", "cpf":"33386811805","data_nascimento": new Date (1993,03,25),"email": "tiago@gmail.com", "login": "tiago"},
+  { "nome": "Gui", "cpf":"99986811805","data_nascimento": new Date (1999,01,27),"email": "gui@gmail.com", "login": "gui"},
+])
+{ acknowledged: true,
+  insertedIds: 
+   { '0': ObjectId("619d45683ee7db39046fbbc3"),
+     '1': ObjectId("619d45683ee7db39046fbbc4"),
+     '2': ObjectId("619d45683ee7db39046fbbc5") } }
+
+db.usuario.find({
+    "nome": "Tiago"
+})
+{ _id: ObjectId("619d45683ee7db39046fbbc4"),
+  nome: 'Tiago',
+  cpf: '33386811805',
+  data_nascimento: 1993-04-25T03:00:00.000Z,
+  email: 'tiago@gmail.com',
+  login: 'tiago' }
+
+db.alunos.find({
+    "nome": /^Ma/ 
+})
+{ _id: ObjectId("619bf10792b96d8e0460b06b"),
+  nome: 'Matheus Camilo',
+  data_nascimento: 1990-07-27T03:00:00.000Z }
+{ _id: ObjectId("619d31159eda7c77c56055e3"),
+  nome: 'Matheus',
+  data_nascimento: 1994-02-27T03:00:00.000Z,
+  idade: 27,
+  curso: { nome: 'Ciência da computação' },
+  notas: [ 10, 9, 7.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'avançado' },
+     { nome: 'jogatina', 'nível': 'intermediário' } ],
+  status: 'A' }
+{ _id: ObjectId("619d31159eda7c77c56055e4"),
+  nome: 'Marcelo',
+  data_nascimento: 1993-02-27T03:00:00.000Z,
+  idade: 26,
+  curso: { nome: 'Artes' },
+  notas: [ 8, 9, 2.5 ],
+  habilidades: 
+   [ { nome: 'inglês', 'nível': 'básico' },
+     { nome: 'jogatina', 'nível': 'avançado' } ],
+  status: 'A' }
+  
+
+db.usuario.updateOne(
+   { nome: "Matheus" },
+   {
+     $set: { "nome": "Matheus Camilo", "cpf": "12345678901", "login": "camilo123" }           
+   }
+)
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0 }
+  
+  
+  
+  
+  db.hoteis.insertMany([
+  { "nome": "Ibis", "estado": "SP", "cidade": "Guaratingueta", "Cep": "12504-010", "numero": 1250, "logradouro": "AV. JK"},
+{ "nome": "Plaza", "estado": "SP", "cidade": "Aparecida", "Cep": "12804-035", "numero": 1950, "logradouro": "AV. Um"},
+{ "nome": "Lotus", "estado": "SP", "cidade": "Lorena", "Cep": "12904-018", "numero": 250, "logradouro": "AV. João Pessoa"},
+{ "nome": "123", "estado": "SP", "cidade": "Piquete", "Cep": "12204-099", "numero": 50, "logradouro": "AV. Principal"},
+{ "nome": "Pool", "estado": "SP", "cidade": "Taubate", "Cep": "11504-055", "numero": 25, "logradouro": "Rua dois"},	
+])
+{ acknowledged: true,
+  insertedIds: 
+   { '0': ObjectId("619d4a733ee7db39046fbbc6"),
+     '1': ObjectId("619d4a733ee7db39046fbbc7"),
+     '2': ObjectId("619d4a733ee7db39046fbbc8"),
+     '3': ObjectId("619d4a733ee7db39046fbbc9"),
+     '4': ObjectId("619d4a733ee7db39046fbbca") } }
+
+db.hoteis.deleteOne( {"nome": "Ibis"})
+{ acknowledged: true, deletedCount: 1 }
+
+db.hoteis.find({
+    "nome": "Plaza"
+})
+{ _id: ObjectId("619d4a733ee7db39046fbbc7"),
+  nome: 'Plaza',
+  estado: 'SP',
+  cidade: 'Aparecida',
+  Cep: '12804-035',
+  numero: 1950,
+  logradouro: 'AV. Um' }
+  
+db.hoteis.find({
+    "nome": "Plaza" , "estado": "SP"
+})
+{ _id: ObjectId("619d4a733ee7db39046fbbc7"),
+  nome: 'Plaza',
+  estado: 'SP',
+  cidade: 'Aparecida',
+  Cep: '12804-035',
+  numero: 1950,
+  logradouro: 'AV. Um' }
+
+db.hoteis.find({
+     "nome": /^P/ }
+)
+{ _id: ObjectId("619d4a733ee7db39046fbbc7"),
+  nome: 'Plaza',
+  estado: 'SP',
+  cidade: 'Aparecida',
+  Cep: '12804-035',
+  numero: 1950,
+  logradouro: 'AV. Um' }
+{ _id: ObjectId("619d4a733ee7db39046fbbca"),
+  nome: 'Pool',
+  estado: 'SP',
+  cidade: 'Taubate',
+  Cep: '11504-055',
+  numero: 25,
+  logradouro: 'Rua dois' }
+db.hoteis.find({
+     "nome": /^Pla/ }
+)
+{ _id: ObjectId("619d4a733ee7db39046fbbc7"),
+  nome: 'Plaza',
+  estado: 'SP',
+  cidade: 'Aparecida',
+  Cep: '12804-035',
+  numero: 1950,
+  logradouro: 'AV. Um' }
+db.hoteis.updateOne(
+   { nome: "Plaza" },
+   {
+     $set: { "nome": "Plaza dois", "cidade": "Guara" }           
+   }
+)
+{ acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0 }
