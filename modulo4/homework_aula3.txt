@@ -1,0 +1,110 @@
+db.hoteis.find({
+    quarto : { $gte: 99} 
+}).sort("nome")
+{ _id: ObjectId("619d4a733ee7db39046fbbc9"),
+  nome: '123',
+  estado: 'SP',
+  cidade: 'Piquete',
+  Cep: '12204-099',
+  numero: 50,
+  logradouro: 'AV. Principal',
+  quarto: 223,
+  status: 'ocupado' }
+{ _id: ObjectId("619d4a733ee7db39046fbbc8"),
+  nome: 'Lotus',
+  estado: 'SP',
+  cidade: 'Lorena',
+  Cep: '12904-018',
+  numero: 250,
+  logradouro: 'AV. João Pessoa',
+  quarto: 150,
+  status: 'disponivel' }
+{ _id: ObjectId("619d4a733ee7db39046fbbc7"),
+  nome: 'Plaza dois',
+  estado: 'SP',
+  cidade: 'Guara',
+  Cep: '12804-035',
+  numero: 1950,
+  logradouro: 'AV. Um',
+  quarto: 121,
+  status: 'ocupado' }
+{ _id: ObjectId("619d4a733ee7db39046fbbca"),
+  nome: 'Pool',
+  estado: 'SP',
+  cidade: 'Taubate',
+  Cep: '11504-055',
+  numero: 25,
+  logradouro: 'Rua dois',
+  quarto: 331,
+  status: 'disponivel' }
+  
+db.hoteis.find({ }).sort( { _id: 1 } )
+{ _id: ObjectId("619d4a733ee7db39046fbbc7"),
+  nome: 'Plaza dois',
+  estado: 'SP',
+  cidade: 'Guara',
+  Cep: '12804-035',
+  numero: 1950,
+  logradouro: 'AV. Um',
+  quarto: 121,
+  status: 'ocupado' }
+{ _id: ObjectId("619d4a733ee7db39046fbbc8"),
+  nome: 'Lotus',
+  estado: 'SP',
+  cidade: 'Lorena',
+  Cep: '12904-018',
+  numero: 250,
+  logradouro: 'AV. João Pessoa',
+  quarto: 150,
+  status: 'disponivel' }
+{ _id: ObjectId("619d4a733ee7db39046fbbc9"),
+  nome: '123',
+  estado: 'SP',
+  cidade: 'Piquete',
+  Cep: '12204-099',
+  numero: 50,
+  logradouro: 'AV. Principal',
+  quarto: 223,
+  status: 'ocupado' }
+{ _id: ObjectId("619d4a733ee7db39046fbbca"),
+  nome: 'Pool',
+  estado: 'SP',
+  cidade: 'Taubate',
+  Cep: '11504-055',
+  numero: 25,
+  logradouro: 'Rua dois',
+  quarto: 331,
+  status: 'disponivel' }
+
+db.hoteis.find({ status: "ocupado" }).sort( { _id : -1 } ).limit(2)
+{ _id: ObjectId("619d4a733ee7db39046fbbc9"),
+  nome: '123',
+  estado: 'SP',
+  cidade: 'Piquete',
+  Cep: '12204-099',
+  numero: 50,
+  logradouro: 'AV. Principal',
+  quarto: 223,
+  status: 'ocupado' }
+{ _id: ObjectId("619d4a733ee7db39046fbbc7"),
+  nome: 'Plaza dois',
+  estado: 'SP',
+  cidade: 'Guara',
+  Cep: '12804-035',
+  numero: 1950,
+  logradouro: 'AV. Um',
+  quarto: 121,
+  status: 'ocupado' }
+ 
+db.hoteis.find( {}, { quarto: 1, "size.uom": 1 } )
+{ _id: ObjectId("619d4a733ee7db39046fbbc7"), quarto: 121 }
+{ _id: ObjectId("619d4a733ee7db39046fbbc8"), quarto: 150 }
+{ _id: ObjectId("619d4a733ee7db39046fbbc9"), quarto: 223 }
+{ _id: ObjectId("619d4a733ee7db39046fbbca"), quarto: 331 }
+
+db.hoteis.aggregate( [
+   { $match: { status: "ocupado" } },
+   { $group: {_id: "$quarto", sumQuantity: { $sum: "$quantity" } } }
+] )
+{ _id: 223, sumQuantity: 0 }
+{ _id: 121, sumQuantity: 0 }
