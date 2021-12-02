@@ -1,6 +1,7 @@
 package com.dbc.chatkafka.controller;
 
 
+import com.dbc.chatkafka.dto.ChatDTO;
 import com.dbc.chatkafka.kafka.Producer;
 import com.dbc.chatkafka.dto.MensagemDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,8 +18,8 @@ public class ProdutorController {
     private final Producer producer;
 
     @PostMapping("/mensagem-especifica")
-    public void enviarMensagemEspecifica(@RequestBody MensagemDTO mensagemDTO) throws JsonProcessingException {
-        producer.sendMessageEspecifica(mensagemDTO);
+    public void enviarMensagemEspecifica(@RequestBody ChatDTO chatDTO) throws JsonProcessingException {
+        producer.sendMessageEspecifica(chatDTO);
     }
 
     @PostMapping
